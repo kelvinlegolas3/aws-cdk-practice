@@ -20,7 +20,7 @@ class L3Bucket extends Construct
   }
 }
 
-export class AwsCdkPracticeStack extends cdk.Stack 
+export class S3Stack extends cdk.Stack 
 {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) 
   {

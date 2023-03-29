@@ -1,7 +1,9 @@
 #!/usr/bin/env node
-import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { AwsCdkPracticeStack } from '../lib/aws-cdk-practice-stack';
+import 'source-map-support/register';
+import { PhotoHandlerStack } from '../lib/PhotoHandlerStack';
+import { PhotoStack } from '../lib/PhotoStack';
 
 const app = new cdk.App();
-new AwsCdkPracticeStack(app, 'AwsCdkPracticeStack');
+new PhotoStack(app, 'PhotoStack');
+new PhotoHandlerStack(app, 'PhotoHandlerStack');
