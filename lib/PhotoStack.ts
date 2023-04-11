@@ -1,13 +1,14 @@
-import * as cdk from 'aws-cdk-lib'
+import { Stack, StackProps } from 'aws-cdk-lib'
 import { CfnOutput, Fn, RemovalPolicy } from 'aws-cdk-lib'
 import { Bucket } from 'aws-cdk-lib/aws-s3'
 import { Construct } from 'constructs'
 
-export class PhotoStack extends cdk.Stack 
+export class PhotoStack extends Stack 
 {
     private stackSuffix: string
+    public readonly bucketArn: string
 
-    constructor(scope: Construct, id: string, props?: cdk.StackProps) 
+    constructor(scope: Construct, id: string, props?: StackProps) 
     {
         super(scope, id, props)
 
@@ -15,15 +16,10 @@ export class PhotoStack extends cdk.Stack
 
         const photosBucket = new Bucket(this, "PhotosBucket", 
         {
-            bucketName: `photos-bucket-${this.stackSuffix}`,
-            removalPolicy: RemovalPolicy.DESTROY,
-            autoDeleteObjects: true
+            bucketName: `photos-bucket-${this.stackSuffix}`
         })
 
-        new CfnOutput(this, "PhotosBucketOutput", {
-            value: photosBucket.bucketArn,
-            exportName: "photos-bucket"
-        })
+        this.bucketArn = photosBucket.bucketArn
     }
 
     private initializeSuffix()
@@ -31,5 +27,4 @@ export class PhotoStack extends cdk.Stack
         const shortStackId = Fn.select(2, Fn.split("/", this.stackId))
         this.stackSuffix = Fn.select(4, Fn.split("-", shortStackId))
     }
-
 }

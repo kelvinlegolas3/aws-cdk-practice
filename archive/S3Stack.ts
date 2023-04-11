@@ -1,4 +1,4 @@
-import * as cdk from 'aws-cdk-lib'
+import { Stack, StackProps }from 'aws-cdk-lib'
 import { CfnParameter, CfnOutput, Duration, RemovalPolicy } from 'aws-cdk-lib'
 import { Bucket, CfnBucket } from 'aws-cdk-lib/aws-s3'
 import { Construct } from 'constructs'
@@ -20,9 +20,9 @@ class L3Bucket extends Construct
   }
 }
 
-export class S3Stack extends cdk.Stack 
+export class S3Stack extends Stack 
 {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) 
+  constructor(scope: Construct, id: string, props?: StackProps) 
   {
     super(scope, id, props);
 
